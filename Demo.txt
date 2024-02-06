@@ -1,5 +1,10 @@
 Hi............................
 I am sumedha
 hello
+<<<<<<< HEAD
 hii
 my name is Tejashri
+=======
+
+i am dnyaneshwari
+jnweiwo 
