@@ -1,6 +1,11 @@
 import React from 'react'
 import img from '../Assets/images/logo.PNG';
 import './external.css';
+import { BrowserRouter,Routes,Route ,Link} from 'react-router-dom'
+import NavComp from './NavComp';
+
+import Login from './Login';
+import RoutingComp from './RoutingComp';
 function WelcomeComp() {
     return (
         <div>
@@ -24,9 +29,16 @@ function WelcomeComp() {
         <li class="nav-item">
              <button type="button" class="btn signup btn-primary " >SignUp</button>
         </li>
+        
+        <BrowserRouter>
         <li class="nav-item">
-            <button type="button" class="btn signin btn-primary " >SignIn</button>
+            {/* <button type="button" class="btn signin btn-primary " href="login" >SignIn</button> */}
+            <Link to="/login" className='btn btn-outline-dark btn-sm'>Sign in</Link>{" "}
+            <NavComp/>
+            
+            
         </li>
+        </BrowserRouter> 
         
       </ul>
     </div>
