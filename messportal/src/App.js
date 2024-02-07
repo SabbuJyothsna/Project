@@ -1,29 +1,28 @@
 import logo from './logo.svg';
 import './App.css';
+
 import Subscribecomp from './Components/Subscribecomp';
 import Menuupdatecomp from './Components/Menuupdatecomp';
 import vendorsignupcomp, { Vendorsignupcomp } from './Components/vendorsignupcomp';
+import VendorsComp from './Components/VendorsComp';
+import IndividualVendorComp from './Components/IndividualVendorComp';
+import CustomerDeliveryComp from './Components/CustomerDeliveryComp';
+import RouterComp from './Components/RouterComp';
 
 function App() {
   return (
     <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
       {/* <Subscribecomp></Subscribecomp> */}
       <Menuupdatecomp></Menuupdatecomp>
       {/* <Vendorsignupcomp></Vendorsignupcomp> */}
+
+    
+      {/* <VendorsComp/> */}
+      {/* <IndividualVendorComp/> */}
+
+      {/* <CustomerDeliveryComp/> */}
+
+      <RouterComp/>
     </div>
   );
 }
