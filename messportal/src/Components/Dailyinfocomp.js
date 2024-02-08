@@ -5,6 +5,7 @@ export class Dailyinfocomp extends Component {
         return (
             <div>
                 <h1>Daily members Info</h1>
+                
             </div>
         )
     }

@@ -1,81 +1,87 @@
 import React, { Component } from 'react';
+import { Tab } from 'bootstrap';
+import { Tabs,Form ,Button} from 'react-bootstrap';
 
 export class Subscribecomp extends Component {
     render() {
         return  (<div>
-        <div class="wrapper">
-    <div class="title-text">
-       <div class="title login">
-          Login Form
-       </div>
-       <div class="title signup">
-          Signup Form
-       </div>
-    </div>
-    <div class="form-container">
-       <div class="slide-controls">
-          <input type="radio" name="slide" id="login" checked/>
-          <input type="radio" name="slide" id="signup"/>
-          <label for="login" class="slide login">Login</label>
-          <label for="signup" class="slide signup">Signup</label>
-          <div class="slider-tab"></div>
-       </div>
-       <div class="form-inner">
-          <form action="#" class="login">
-             <div class="field">
-                <input type="text" placeholder="Email Address" required/>
-             </div>
-             <div class="field">
-                <input type="password" placeholder="Password" required/>
-             </div>
-             <div class="pass-link">
-                <a href="#">Forgot password?</a>
-             </div>
-             <div class="field btn">
-                <div class="btn-layer"></div>
-                <input type="submit" value="Login"/>
-             </div>
-             <div class="signup-link">
-                Not a member? <a href="">Signup now</a>
-             </div>
-          </form>
-          <form action="#" class="signup">
-             <div class="field">
-                <input type="text" placeholder="Email Address" required/>
-             </div>
-             <div class="field">
-                <input type="password" placeholder="Password" required/>
-             </div>
-             <div class="field">
-                <input type="password" placeholder="Confirm password" required/>
-             </div>
-             <div class="field btn">
-                <div class="btn-layer"></div>
-                <input type="submit" value="Signup"/>
-             </div>
-          </form>
-       </div>
-    </div>
- </div>
- {/* <script>
-    const loginText = document.querySelector(".title-text .login");
-    const loginForm = document.querySelector("form.login");
-    const loginBtn = document.querySelector("label.login");
-    const signupBtn = document.querySelector("label.signup");
-    const signupLink = document.querySelector("form .signup-link a");
-    signupBtn.onclick = (()=>{
-      loginForm.style.marginLeft = "-50%";
-      loginText.style.marginLeft = "-50%";
-    });
-    loginBtn.onclick = (()=>{
-      loginForm.style.marginLeft = "0%";
-      loginText.style.marginLeft = "0%";
-    });
-    signupLink.onclick = (()=>{
-      signupBtn.click();
-      return false;
-    });
- </script> */}
+
+         <form className='mb-3 mt-5'>
+          <Tabs
+      defaultActiveKey="profile"
+      id="justify-tab-example"
+      className="mb-3"
+       justify
+    >
+      <Tab eventKey="weekly" title="Weekly">
+      <Form>
+      <Form.Group className="mb-3" controlId="formBasicName">
+        <Form.Label>Fullname</Form.Label>
+        <Form.Control type="text" placeholder="Enter fullname" />
+        {/* <Form.Text className="text-muted">
+          We'll never share your email with anyone else.
+        </Form.Text> */}
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicNumber">
+        <Form.Label>Number</Form.Label>
+        <Form.Control type="tel" placeholder="Number" />
+      </Form.Group>
+      {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
+        {/* <Form.Check type="checkbox" label="Check me out" /> 
+      </Form.Group> */}
+      <Form.Group className="mb-3" controlId="formBasicAddress">
+        <Form.Label>Address</Form.Label>
+        <Form.Control type="text" placeholder="Enter Address" />
+      </Form.Group>
+      <Form.Group className="mb-3">
+          <Form.Label htmlFor="Select">Select menu</Form.Label>
+          <Form.Select id="disabledSelect">
+            <option>Delivery</option>
+            <option>Dine In</option>
+          </Form.Select>
+          </Form.Group>
+      <Button variant="primary" type="submit">
+        Submit
+      </Button>
+    </Form>
+      </Tab>
+      <Tab eventKey="Monthly" title="Monthly">
+      <Form>
+      <Form.Group className="mb-3" controlId="formBasicName">
+        <Form.Label>Fullname</Form.Label>
+        <Form.Control type="text" placeholder="Enter fullname" />
+        {/* <Form.Text className="text-muted">
+          We'll never share your email with anyone else.
+        </Form.Text> */}
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicNumber">
+        <Form.Label>Number</Form.Label>
+        <Form.Control type="tel" placeholder="Number" />
+      </Form.Group>
+      {/* <Form.Group className="mb-3" controlId="formBasicCheckbox">
+        {/* <Form.Check type="checkbox" label="Check me out" /> 
+      </Form.Group> */}
+      <Form.Group className="mb-3" controlId="formBasicAddress">
+        <Form.Label>Address</Form.Label>
+        <Form.Control type="text" placeholder="Enter Address" />
+      </Form.Group>
+      <Form.Group className="mb-3">
+          <Form.Label htmlFor="Select">Select menu</Form.Label>
+          <Form.Select id="disabledSelect">
+            <option>Delivery</option>
+            <option>Dine In</option>
+          </Form.Select>
+          </Form.Group>
+      <Button variant="primary" type="submit">
+        Submit
+      </Button>
+    </Form>
+      </Tab>
+    </Tabs>
+    </form>
+       
    </div>)
     }
 }
