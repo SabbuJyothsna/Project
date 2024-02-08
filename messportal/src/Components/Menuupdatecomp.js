@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Tabs,Form ,Button,Nav} from 'react-bootstrap';
 
 export class Menuupdatecomp extends Component {
 
@@ -11,20 +12,31 @@ export class Menuupdatecomp extends Component {
 
         return (
             <div>
-                <form>
-
-                   <h1>Form to update daily Menu</h1>
-                   
-                   <label>Please enter today's menu here</label><br></br>
-                   <input type='text' name='menu' /><br></br>
-                   <button type='submit'onClick={nextpage} >Update</button><br></br>
-
-                <button >view members</button><br></br>
-                <button>Delivery</button><br></br>
-                <button>Monthly report</button><br></br>
-             
-             
-                </form>
+                <h1>Form to update daily Menu</h1>
+                <Nav className="justify-content-end" activeKey="/home">
+        <Nav.Item>
+          <Nav.Link href="/home">ViewMembers</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="link-1">Delivery</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="link-2">Monthly Report</Nav.Link>
+        </Nav.Item>
+      </Nav>
+                <Form>
+      <Form.Group className="mb-3" controlId="formBasicName">
+        <Form.Label>Please enter today's menu here</Form.Label>
+        <Form.Control type="text" placeholder="Enter Menu" />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicName">
+        <Form.Label>Price</Form.Label>
+        <Form.Control type="number" placeholder="Enter price" />
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Update
+      </Button>
+      </Form>
             </div>
         )
     }
