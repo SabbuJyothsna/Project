@@ -1,37 +1,37 @@
 import {useState,React, useEffect} from 'react'
-// import axios from 'axios'
+ import axios from 'axios'
 import {Link} from 'react-router-dom'
 import {Button,Modal} from 'react-bootstrap'
 import Footerr from './Footerr'
 import Header1 from './Header1'
 
 const CustomerHomePage = () => {
-    // const[product,setProduct]=useState([])        //stores array of products
+    const[user,setuser]=useState([])        //stores array of products
 
-    // const[item,setItem]=useState({})   //store details of specific product
-    // //modal of react-bootstrap
-    // const [show, setShow] = useState(false);          //managges visibility of modal
-    // const handleClose = () => setShow(false);        // function thats sets the show state to false to close the modal
-    // const handleShow = (data) => {                   //function that sets the show state to true to open the modal
-    //     setItem(data)
-    //     setShow(true);
-    // };
+    const[item,setItem]=useState({})   //store details of specific product
+    //modal of react-bootstrap
+    const [show, setShow] = useState(false);          //managges visibility of modal
+    const handleClose = () => setShow(false);        // function thats sets the show state to false to close the modal
+    const handleShow = (data) => {                   //function that sets the show state to true to open the modal
+        setItem(data)
+        setShow(true);
+    };
 
 
-    // useEffect(()=>{                                     //The useEffect hook is used to fetch data from the server using Axios when the component mounts 
-    //     fetchData();
-    // },[])
+    useEffect(()=>{                                     //The useEffect hook is used to fetch data from the server using Axios when the component mounts 
+        fetchData();
+    },[])
 
-    // //this is get request
-    // const fetchData=()=>{
-    //     axios.get("http://localhost:8888/product").then((res)=>{
-    //         console.log(res.data);
-    //         setProduct(res.data);
-    //     }).catch((err)=>{})
-    // }
+    //this is get request
+    const fetchData=()=>{
+        axios.get("http://localhost:8089/messportal/users/reg").then((res)=>{
+            console.log(res.data);
+            setuser(res.data);
+        }).catch((err)=>{})
+    }
 
-    // //this id delete request
-    // // whenever we click on delete button it shows the delete product id on console and deleete the record from table and gives alert message
+    //this id delete request
+    // whenever we click on delete button it shows the delete product id on console and deleete the record from table and gives alert message
     // const deleteRecord=(id)=>{                       
     //     console.log(id);
     //     if(window.confirm(`Are you sure you want to delete product with id :${id}`)){
@@ -55,13 +55,13 @@ const CustomerHomePage = () => {
             </tr>
         </thead>
         <tbody>
-            {/* {product.map((val,index)=>{
+            {user.map((val,index)=>{
                 // if we gave val.id then after deleting element the number will not come serially so we take index
                 return <tr key={index}>
                     <td>{index+1}</td>              
-                    <td>{val.name}</td>
-                    <td>{val.price}</td>
-                    <td>{val.company}</td>
+                    <td>{val.userName}</td>
+                    <td>{val.userPhone}</td>
+                    <td>{val.email}</td>
                     <td>
                         <Button variant='outline-success-sm' onClick={()=>handleShow(val)}><i class="fa fa-eye" aria-hidden="true"></i></Button>
                         <Link to={`/editproduct/${val.id}`}   ><i class="fa fa-pencil" aria-hidden="true"></i></Link>{" "}{" "}
@@ -69,7 +69,7 @@ const CustomerHomePage = () => {
                         <button className ="btn btn-outline-warning btn-sm" type="button" >Delivery</button>
                     </td>
                 </tr>
-            })} */}
+            })}
         </tbody>
         </table>
 
@@ -77,7 +77,7 @@ const CustomerHomePage = () => {
         
 
         {/* modal starts here */}
-        {/* <Modal
+        <Modal
         show={show}
         onHide={handleClose}
         backdrop="static"
@@ -103,7 +103,7 @@ const CustomerHomePage = () => {
         <Button variant="primary">OK</Button>
 
         </Modal.Footer>
-        </Modal> */}
+        </Modal> 
 
         <Footerr/>
         </div>
