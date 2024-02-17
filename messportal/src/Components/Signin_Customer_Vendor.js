@@ -24,13 +24,6 @@ const Signin_Customer_Vendor = () => {
         password:" "
     });
 
-    // const inputChangeHandler=(event)=>{
-    //     const{type,name,value}=event.target;
-    //     setItem({...item,[name]:value});
-        
-
-    // }
-
     const addDetails=(event)=>{
         event.preventDefault();           //to prevent page loading
         // console.log(item);
@@ -54,14 +47,7 @@ const Signin_Customer_Vendor = () => {
   return (
 
     <div>
-      <Header/>
-      <div className='loginh'>
-        <br/>
-        <br/>
-          <h3 style={{color:"Gray"}}>LOGIN</h3>
-      </div>
-
-        <div class='container'>
+  <div class='container'>
         
         <Form className='form1 mt-5 mb-3' onSubmit={addDetails}>
               <Form.Group as={Row} className="mb-3 me-5 mt-3" controlId="formHorizontalEmail">
@@ -96,22 +82,19 @@ const Signin_Customer_Vendor = () => {
                 </Dropdown>
                 </Col>
               </Form.Group>
-              
-              <Form.Group as={Row} className="mb-3 mt-5">
-                <Col sm={{ span: 10, offset: 1 }}>
-                  <Button id="Submit" type="submit">Sign in</Button>
-                </Col>
-              </Form.Group>
-            </Form>
-            
-        </div>
-        
-          
-    <Footerr/>
-      
-    </div>
-    
-  )
-}
 
-export default Signin_Customer_Vendor
+                  <Form.Group as={Row} className="mb-3 mt-5">
+                    <Col sm={{ span: 10, offset: 1 }}>
+                      <Button id="Submit" type="submit">Sign in</Button>
+                    </Col>
+                  </Form.Group>
+                </Form>
+  
+            </div>    
+        <Footerr/>
+  </div>
+        
+      )
+    }
+    
+    export default Signin_Customer_Vendor
