@@ -1,7 +1,8 @@
 import React,{useState} from 'react'
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -16,6 +17,40 @@ const Signin_Customer_Vendor = () => {
   const handleSelect = (eventKey) => {
     setSelectedOption(eventKey);
   };
+
+  const nav= useNavigate();
+    const[item,setItem]=useState({
+        email:" ",
+        password:" "
+    });
+
+    // const inputChangeHandler=(event)=>{
+    //     const{type,name,value}=event.target;
+    //     setItem({...item,[name]:value});
+        
+
+    // }
+
+    const addDetails=(event)=>{
+        event.preventDefault();           //to prevent page loading
+        // console.log(item);
+        axios.post(`http://localhost:8089/messportal/users/login`,item).then(()=>{
+            window.alert("details added successfully");
+            // nav("/homepage1");
+            if(selectedOption=="Customer")
+            {
+              
+              nav("/homepage1");
+            }
+            else{
+              nav("/homepage2");
+            }
+            
+        }).catch((err)=>{})
+    }
+
+    
+
   return (
 
     <div>
@@ -28,13 +63,13 @@ const Signin_Customer_Vendor = () => {
 
         <div class='container'>
         
-        <Form className='form1 mt-5 mb-3'>
+        <Form className='form1 mt-5 mb-3' onSubmit={addDetails}>
               <Form.Group as={Row} className="mb-3 me-5 mt-3" controlId="formHorizontalEmail">
                 <Form.Label column sm={2}>
                   Email : 
                 </Form.Label>
                 <Col sm={10}>
-                  <Form.Control type="email" placeholder="Enter Email . . ."  required/>
+                  <Form.Control type="email" name="email" placeholder="Enter Email . . ."  required/>
                 </Col>
               </Form.Group>
 
@@ -43,7 +78,7 @@ const Signin_Customer_Vendor = () => {
                   Password : 
                 </Form.Label>
                 <Col sm={10}>
-                  <Form.Control type="password" placeholder="Enter Password . . ." required/>
+                  <Form.Control type="password" name ="password" placeholder="Enter Password . . ." required/>
                 </Col>
               </Form.Group>
 
