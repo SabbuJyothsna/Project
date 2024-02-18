@@ -6,12 +6,53 @@ import { Dropdown,DropdownButton } from 'react-bootstrap';
 import Footerr from './Footerr';
 import Header from './Header';
 import{Router,Switch,Route,Routes} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
 const Signup_Customer_vendor = () => {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleSelect = (eventKey) => {
     setSelectedOption(eventKey);
   };
+
+  const nav= useNavigate();
+  const[item,setItem]=useState({
+      email:"",
+      password:"",
+      userName:"",
+      userPhone:"",
+      userIdProof:"",
+      addressDescription:""
+
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setItem({
+      ...item,
+      [name]: value,
+    });
+  };
+
+  const addUser=(event)=>{
+      event.preventDefault();           //to prevent page loading
+      // console.log(item);
+      axios.post(`http://localhost:8089/messportal/users/reg/add`,item).then(()=>{
+          window.alert("details added successfully");
+          nav("/signin");
+
+      
+          // if(selectedOption=="Customer")
+          // {
+            
+          //   nav("/homepage1");
+          // }
+          // else{
+          //   nav("/homepage2");
+          // }
+          
+      }).catch((err)=>{})
+  }
 
   return (
     <div className='register'>
@@ -22,20 +63,7 @@ const Signup_Customer_vendor = () => {
 
 
 
-    
-      
-    
-{/* 
-<div class="container">
-<div className='mt-5 mb-2' >
-  <input  type="radio" id="customer" value="customer" checked={userType === 'customer'} onChange={handleUserTypeChange}/>
-  <label >  Sign up as Customer </label>
-</div>
-<div >
-  <input type="radio" id="vendor" value="vendor" checked={userType === 'vendor'} onChange={handleUserTypeChange} />
-  <label > Sign up as Vendor</label>
-</div>
-</div>  */}
+
 
 
     {/* <div>
@@ -130,38 +158,38 @@ const Signup_Customer_vendor = () => {
 
       
         <div class="container">
-        <Form>
+        <Form onSubmit={addUser}>
 
-        <Row className="mb-3 mt-3">
-              <Dropdown onSelect={handleSelect}>
-                  <DropdownButton title={selectedOption ? `Selected: ${selectedOption}` : 'Sign in as '}>
-                    <Dropdown.Item eventKey="Customer" >Customer</Dropdown.Item>
-                    <Dropdown.Item eventKey="Vendor">Vendor</Dropdown.Item>
-                    <Dropdown.Item eventKey="Admin">Admin</Dropdown.Item>
-                  </DropdownButton>
-                </Dropdown>
-        </Row>
+        {/* <Row className="mb-3 mt-3">
+        <Dropdown onSelect={(eventKey) => setItem({ ...item, roleId: eventKey })}>
+                <DropdownButton title={item.roleId ? `Selected: ${item.roleId}` : 'Sign in as '}>
+                  <Dropdown.Item eventKey="Customer">Customer</Dropdown.Item>
+                  <Dropdown.Item eventKey="Vendor">Vendor</Dropdown.Item>
+                  <Dropdown.Item eventKey="Admin">Admin</Dropdown.Item>
+                </DropdownButton>
+              </Dropdown>
+        </Row> */}
         <Row className="mb-3 mt-3">
           <Form.Group as={Col} controlId="formGridEmail">
             <Form.Label>Email ID  : </Form.Label>
-            <Form.Control type="email" placeholder="Enter email ID . . . " required />
+            <Form.Control type="email" name="email" placeholder="Enter email ID . . . " required  onChange={handleChange} />
           </Form.Group>
   
           <Form.Group as={Col} controlId="formGridPassword">
             <Form.Label>Password : </Form.Label>
-            <Form.Control type="password" placeholder="Enter Password . . ." required />
+            <Form.Control type="password" name='password' placeholder="Enter Password . . ." required onChange={handleChange}/>
           </Form.Group>
         </Row>
 
         <Row className="mb-3 mt-3">
           <Form.Group as={Col} controlId="formGridEmail">
             <Form.Label>Full Name  : </Form.Label>
-            <Form.Control type="text" placeholder="Enter full name  . . . " required/>
+            <Form.Control type="text" name='user_name' placeholder="Enter full name  . . . " required onChange={handleChange} />
           </Form.Group>
   
           <Form.Group as={Col} controlId="formGridPassword">
             <Form.Label>Phone : </Form.Label>
-            <Form.Control type="number" placeholder="Enter phone number. . ." required/>
+            <Form.Control type="number"name='user_phone' placeholder="Enter phone number. . ." required onChange={handleChange}/>
           </Form.Group>
         </Row>
 
@@ -169,12 +197,12 @@ const Signup_Customer_vendor = () => {
 
         <Form.Group as={Col} controlId="formGridPassword">
             <Form.Label>Address : </Form.Label>
-            <Form.Control type="text" placeholder="Enter full address. . ." required/>
+            <Form.Control type="text"  placeholder="Enter full address. . ." required onChange={handleChange}/>
           </Form.Group>
 
         <Form.Group as={Col} controlId="formGridAddress2">
           <Form.Label>Government ID Proof  : </Form.Label>
-          <Form.Control type= "number" placeholder="Enter Adhar/PAN no.  . . . " />
+          <Form.Control type= "number" name='user_id_proof' placeholder="Enter Adhar/PAN no.  . . . " onChange={handleChange} />
         </Form.Group>
         </Row>
 
