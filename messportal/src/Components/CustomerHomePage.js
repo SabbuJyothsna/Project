@@ -77,7 +77,7 @@ const CustomerHomePage = () => {
                     <td>
                         
                         <button className ="btn btn-outline-warning btn-sm" type="button" onClick={()=>handleShow(val)}  >View Menu</button> {" "}
-                        <Link to="/subscription" className="btn  btn-outline-success btn-sm">Subscription</Link>
+                        
                     </td>
                 </tr>
             })}
@@ -124,7 +124,8 @@ const CustomerHomePage = () => {
                     <td>{val1.price}</td>
                     <td>
                     <button className ="btn btn-outline-warning btn-sm" type="button"   >Book</button> {" "}
-                    <button className="btn  btn-outline-success btn-sm">Delivery</button>
+                    <button className="btn  btn-outline-success btn-sm">Delivery</button>{" "}
+                    <Link to="/subscription" className="btn  btn-outline-danger btn-sm">Subscribe</Link> 
                     </td>
                     
                 </tr>
