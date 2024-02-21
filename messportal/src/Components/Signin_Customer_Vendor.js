@@ -28,7 +28,7 @@ const Signin_Customer_Vendor = () => {
         event.preventDefault();           //to prevent page loading
         // console.log(item);
         axios.post(`http://localhost:8089/messportal/users/login`,item).then(()=>{
-            window.alert("details added successfully");
+            // window.alert("details added successfully");
             // nav("/homepage1");
             if(selectedOption=="Customer")
             {

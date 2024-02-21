@@ -6,47 +6,47 @@ import Footerr from './Footerr'
 import Header1 from './Header1'
 
 const CustomerHomePage = () => {
-    const[user,setuser]=useState([])        //stores array of products
+    const[user,setuser]=useState([])        
 
-    const[item,setItem]=useState({})   //store details of specific product
-    //modal of react-bootstrap
-    const [show, setShow] = useState(false);          //managges visibility of modal
-    const handleClose = () => setShow(false);        // function thats sets the show state to false to close the modal
-    const handleShow = (data) => {                   //function that sets the show state to true to open the modal
-        setItem(data)
+    const[item,setItem]=useState({})  
+    
+    const [menuDetails, setMenuDetails] = useState([]);
+    
+    const [show, setShow] = useState(false);          
+    const handleClose = () => setShow(false);        
+    const handleShow = (val) => {
+        console.log(val.id);
+        setItem(val);
+        fetchData1(val.id); 
         setShow(true);
     };
 
-
-    useEffect(()=>{                                     //The useEffect hook is used to fetch data from the server using Axios when the component mounts 
+    useEffect(()=>{                                     
         fetchData();
+        
+        
     },[])
 
-    //this is get request
+    
     const fetchData=()=>{
-        axios.get("http://localhost:8089/messportal/users/reg").then((res)=>{
+        axios.get("http://localhost:8089/messportal/users/vendors").then((res)=>{
             console.log(res.data);
             setuser(res.data);
         }).catch((err)=>{})
     }
 
-    //this id delete request
-    // whenever we click on delete button it shows the delete product id on console and deleete the record from table and gives alert message
-    // const deleteRecord=(id)=>{                       
-    //     console.log(id);
-    //     if(window.confirm(`Are you sure you want to delete product with id :${id}`)){
-    //         axios.delete(`http://localhost:8888/product/${id}`).then(()=>{
-    //        window.alert("product deleted successfully");
-    //         fetchData();
-    //     }).catch((err)=>{})
-    //     }
-    // }
+    const fetchData1=(vendorId)=>{
+        axios.get(`http://localhost:8089/messportal/menu/menudetails/vendor/${vendorId}`).then((res)=>{
+            console.log(res.data);
+            setMenuDetails(res.data);
+        }).catch((err)=>{})
+    }
+
     return (
-        <div >
+        <div className='mt-4'>
             <Header1/>
             <h3 style ={{color:"Gray"}}>LIST OF MESS VENDORS !! </h3>
-            <Button variant='outline-success-sm' ><i class="fa fa-eye" aria-hidden="true"></i></Button>
-        <button className ="btn btn-outline-danger btn-lg" type="button" ><i class="fa fa-address-book-o" aria-hidden="true"></i></button>
+            
         
         <table className='container table table-hover table-striped mt-4'>
         <thead>
@@ -56,27 +56,27 @@ const CustomerHomePage = () => {
         </thead>
         <tbody>
             {user.map((val,index)=>{
-                // if we gave val.id then after deleting element the number will not come serially so we take index
                 return <tr key={index}>
                     <td>{index+1}</td>              
                     <td>{val.userName}</td>
                     <td>{val.userPhone}</td>
-                    <td>{val.email}</td>
+                    <td>{ val.addresses.map((adr,index)=>{
+                        
+                            return <td>{adr.addressDescription }</td>
+                        
+
+                    })}</td>
+
                     <td>
-                        <Button variant='outline-success-sm' onClick={()=>handleShow(val)}><i class="fa fa-eye" aria-hidden="true"></i></Button>
-                        <Link to={`/editproduct/${val.id}`}   ><i class="fa fa-pencil" aria-hidden="true"></i></Link>{" "}{" "}
-                        <button className ="btn btn-outline-success btn-sm" type="button" >Book</button>
-                        <button className ="btn btn-outline-warning btn-sm" type="button" >Delivery</button>
+                        
+                        <button className ="btn btn-outline-warning btn-sm" type="button" onClick={()=>handleShow(val)}  >View Menu</button> {" "}
+                        
                     </td>
                 </tr>
             })}
         </tbody>
         </table>
 
-
-        
-
-        {/* modal starts here */}
         <Modal
         show={show}
         onHide={handleClose}
@@ -84,17 +84,45 @@ const CustomerHomePage = () => {
         keyboard={false}
         >
         <Modal.Header closeButton>
-        <Modal.Title>{item.name}</Modal.Title>
+        <Modal.Title>{item.userName}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <table>
+        {/* <table>
         <tr>
-        <th>Id : </th><th>{item.id}</th>{" "}
-        <th>Name : </th><th>{item.name}</th>{" "}
+        <th>Type : </th><th>{item.type}</th>{" "}
+        <th>Menu : </th><th>{item.description}</th>{" "}
         <th>Price : </th><th>{item.price}</th>{" "}
-        <th>Company : </th><th>{item.company}</th>
         </tr>
+        </table> */}
+
+        <table className='container table table-hover table-striped mt-4'>
+        <thead>
+            <tr className='table table-dark'>
+                <th>Sr.No</th><th>Type</th><th>Menu</th><th>Price</th><th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        
+              
+        {menuDetails.map((val1,index)=>{
+                
+                return <tr key={index}>
+                    <td>{index+1}</td>              
+                    <td>{val1.type}</td>
+                    <td>{val1.description}</td>
+                    <td>{val1.price}</td>
+                    <td>
+                    <button className ="btn btn-outline-warning btn-sm" type="button"   >Book</button> {" "}
+                    <button className="btn  btn-outline-success btn-sm">Delivery</button>{" "}
+                    <Link to="/subscription" className="btn  btn-outline-danger btn-sm">Subscribe</Link> 
+                    </td>
+                    
+                </tr>
+            })}
+              
+        </tbody>
         </table>
+
         </Modal.Body>
         <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
@@ -103,7 +131,7 @@ const CustomerHomePage = () => {
         <Button variant="primary">OK</Button>
 
         </Modal.Footer>
-        </Modal> 
+        </Modal>
 
         <Footerr/>
         </div>
