@@ -1,8 +1,30 @@
-import React from 'react'
+import {React,useState,useEffect} from 'react'
 import{Row,Col,Form,Button} from 'react-bootstrap';
 import Footerr from './Footerr';
 import Header1 from './Header1';
+import axios from 'axios'
 const MenuUpdate = () => {
+
+  const[item,setItem]=useState([])        
+
+    
+
+
+    useEffect(()=>{                                     
+        fetchData();
+        
+        
+    },[])
+
+    
+    const fetchData=()=>{
+        axios.post("http://localhost:8089/messportal/menu/menudetails/add").then((res)=>{
+            
+           
+        }).catch((err)=>{})
+    }
+
+    
     return (
         <div >
           <Header1/>

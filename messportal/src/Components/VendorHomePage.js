@@ -27,45 +27,45 @@ const VendorHomePage = () => {
     </Navbar> */}
 
         <h1>Welcome !!</h1>
-        
-        <br></br>
-        <br></br>
+        <br/>
+
 
 
 
     <Form className='form1 mt-1 '>
-              <Form.Group as={Row}  controlId="formHorizontalEmail">
+              <Form.Group as={Row} className="mt-1" controlId="formHorizontalEmail">
                 
-              <Col sm={6}>
-                <Link to="/report" className="btn btn-secondary btn-lg me-4 shadow-lg p-3 mb-5 rounded w-50">Monthly Report</Link>
-                </Col>
-                <Col >
-                <Link to="/members" className="btn btn-secondary btn-lg me-4 shadow-lg p-3 mb-5 rounded w-50">View Members</Link>
+                <Col sm={12}>
+                <Link to="/menu" className="btn btn-secondary btn-lg me-4 shadow-lg p-3 mb-5 rounded w-50">Menu update</Link>
                 </Col>
               </Form.Group>
 
-              
-              
-              <Form.Group as={Row} controlId="formHorizontalEmail">
+              <Form.Group as={Row} className=" mt-1" controlId="formHorizontalEmail">
                 
-                <Col sm={6}>
+                <Col sm={12}>
+                <Link to="/members" className="btn btn-secondary btn-lg me-4 shadow-lg p-3 mb-5 rounded w-50">View Members</Link>
+                </Col>
+              </Form.Group>
+              
+              <Form.Group as={Row} className=" mt-1" controlId="formHorizontalEmail">
+                
+                <Col sm={12}>
                 <Link to="/dailyorder" className="btn btn-secondary btn-lg me-4 shadow-lg p-3 mb-5 rounded w-50">Today's Orders</Link>
                 </Col>
-                <Col >
+              </Form.Group>
+
+
+              <Form.Group as={Row} className=" mt-1" controlId="formHorizontalEmail">
+                
+                <Col sm={12}>
                 <Link to="/dailydelivery" className="btn btn-secondary btn-lg me-4 shadow-lg p-3 mb-5 rounded w-50">Today's Delivery Orders</Link>
                 </Col>
               </Form.Group>
 
-
-              <Form.Group as={Row}  controlId="formHorizontalEmail">
-                
-                
-              </Form.Group>
-
-              <Form.Group as={Row}  controlId="formHorizontalEmail">
+              <Form.Group as={Row} className=" mt-1" controlId="formHorizontalEmail">
                 
                 <Col sm={12}>
-                <Link to="/menu" className="btn btn-secondary btn-lg me-4 shadow-lg p-3 mb-5 rounded w-50">Menu update</Link>
+                <Link to="/report" className="btn btn-secondary btn-lg me-4 shadow-lg p-3 mb-5 rounded w-50">Monthly Report</Link>
                 </Col>
               </Form.Group>
               
