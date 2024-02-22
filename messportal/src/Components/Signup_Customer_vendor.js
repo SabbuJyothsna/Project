@@ -59,7 +59,6 @@ const Signup_Customer_vendor = () => {
   const addUser = (event) => {
     event.preventDefault();           //to prevent page loading
     console.log(item);
-    console.log("roleid state method" + roleId);
     axios.post(`http://localhost:8089/messportal/users/reg/add`, item).then(() => {
       window.alert("details added successfully");
       nav("/signin");
@@ -120,7 +119,6 @@ const Signup_Customer_vendor = () => {
               </Form.Group>
             </Row>
 
-
             <Row className="mb-3 mt-3">
               <Form.Group as={Col} controlId="formGridEmail">
                 <Form.Label>Full Name  : </Form.Label>
@@ -133,8 +131,6 @@ const Signup_Customer_vendor = () => {
                   <Form.Control type="number" name='userPhone' placeholder="Enter phone number. . ." required value={item.userPhone} onChange={inputchangehandler} />
                 </Form.Group>
               </Row>
-
-
 
               <Row className="mb-3 mt-3">
 
@@ -151,8 +147,6 @@ const Signup_Customer_vendor = () => {
                   <Form.Control type="number" name='userIdProof' placeholder="Enter Adhar/PAN no.  . . . " value={item.userIdProof} onChange={inputchangehandler} />
                 </Form.Group>
               </Row>
-
-
 
               <Button className="mt-4" variant="primary" type="submit">
                 Submit

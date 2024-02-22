@@ -30,7 +30,7 @@ const RoutingComp = () => {
                  <Route path='signup' element={<Signup_Customer_vendor/>}></Route>
                  <Route path='signin' element={<Signin_Customer_Vendor/>}></Route>
                  <Route path='homepage1' element={<CustomerHomePage/>}></Route>
-                 <Route path='delivery' element={<Delivery/>}></Route>
+                 <Route path='delivery/:id' element={<Delivery/>}></Route>
                  <Route path='subscription' element={<Subscription/>}></Route>
                  <Route path='homepage2' element={<VendorHomePage/>}></Route>
                  <Route path='menu' element={<MenuUpdate/>}></Route>

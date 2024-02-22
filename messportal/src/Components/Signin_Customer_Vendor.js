@@ -24,12 +24,24 @@ const Signin_Customer_Vendor = () => {
         password:" "
     });
 
+    const inputchangehandler = (event) => {
+      const { type, name, value } = event.target;
+      setItem({ ...item, [name]: value })
+    }
+
+
+
     const addDetails=(event)=>{
         event.preventDefault();           //to prevent page loading
         // console.log(item);
-        axios.post(`http://localhost:8089/messportal/users/login`,item).then(()=>{
+        axios.post(`http://localhost:8089/messportal/users/login`,item).then((res)=>{
             // window.alert("details added successfully");
             // nav("/homepage1");
+           // console.log(item.password);
+            const token= res.data;
+           // console.log(res.data);
+            localStorage.setItem("token",res.data.token);
+            //setAuthToken(token);
             if(selectedOption=="Customer")
             {
               
@@ -42,20 +54,35 @@ const Signin_Customer_Vendor = () => {
         }).catch((err)=>{})
     }
 
+  //   const setAuthToken = token => {
+  //     if (token) {
+  //        return axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  //     }
+  //     else
+  //        return delete axios.defaults.headers.common["Authorization"];
+  //  }
     
 
   return (
-
     <div>
+    <Header/>
+    <div className='loginh'>
+      <br/>
+      <br/>
+        <h3 style={{color:"Gray"}}>LOGIN</h3>
+    </div>
+
+
   <div class='container'>
         
+
         <Form className='form1 mt-5 mb-3' onSubmit={addDetails}>
               <Form.Group as={Row} className="mb-3 me-5 mt-3" controlId="formHorizontalEmail">
                 <Form.Label column sm={2}>
                   Email : 
                 </Form.Label>
                 <Col sm={10}>
-                  <Form.Control type="email" name="email" placeholder="Enter Email . . ."  required/>
+                  <Form.Control type="email" name="email" placeholder="Enter Email . . ." value={item.email} required onChange={inputchangehandler}/>
                 </Col>
               </Form.Group>
 
@@ -64,7 +91,7 @@ const Signin_Customer_Vendor = () => {
                   Password : 
                 </Form.Label>
                 <Col sm={10}>
-                  <Form.Control type="password" name ="password" placeholder="Enter Password . . ." required/>
+                  <Form.Control type="password" name ="password" placeholder="Enter Password . . ." value={item.password} required onChange={inputchangehandler}/>
                 </Col>
               </Form.Group>
 

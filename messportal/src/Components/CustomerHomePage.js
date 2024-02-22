@@ -5,12 +5,16 @@ import {Button,Modal} from 'react-bootstrap'
 import Footerr from './Footerr'
 import Header1 from './Header1'
 
+
 const CustomerHomePage = () => {
+    //const nav= useNavigate();
+    
     const[user,setuser]=useState([])        
 
     const[item,setItem]=useState({})  
     
     const [menuDetails, setMenuDetails] = useState([]);
+
     
     const [show, setShow] = useState(false);          
     const handleClose = () => setShow(false);        
@@ -19,28 +23,52 @@ const CustomerHomePage = () => {
         setItem(val);
         fetchData1(val.id); 
         setShow(true);
+
     };
 
-    useEffect(()=>{                                     
+
+
+    useEffect(()=>{ 
+
         fetchData();
-        
-        
     },[])
 
+//     const orderordelivery=(event)=>{
+//         event.preventDefault();           //to prevent page loading
+//         axios.post(`http://localhost:8089/messportal/orders/reg/add`, BookingDetails).then(() => {
+//           window.alert("details added successfully");
+//           nav("/signin");
+//         }).catch((err) => { })
+   
+//    }
     
-    const fetchData=()=>{
+    const  fetchData= async()=>{
+        const token=localStorage.getItem('token');
+        console.log('token = '+token);
+        const headers = { 'Access-Control-Allow-Credentials': true,
+            'Content-Type': 'application/json',
+            'Authorization': token };
+            console.log(headers);
+           axios.defaults.headers.common['Authorization'] = token;
         axios.get("http://localhost:8089/messportal/users/vendors").then((res)=>{
-            console.log(res.data);
+           // console.log(res.data);
             setuser(res.data);
-        }).catch((err)=>{})
+        }).catch((err)=>{ console.log(err)})
     }
 
     const fetchData1=(vendorId)=>{
         axios.get(`http://localhost:8089/messportal/menu/menudetails/vendor/${vendorId}`).then((res)=>{
-            console.log(res.data);
+           // console.log(res.data);
             setMenuDetails(res.data);
         }).catch((err)=>{})
     }
+
+    // const orderordelivery=(event)=>{
+    //     axios.get(`http://localhost:8089/messportal/menu/menudetails/vendor/${vendorId}`).then((res)=>{
+    //        // console.log(res.data);
+    //         setMenuDetails(res.data);
+    //     }).catch((err)=>{})
+    // }
 
     return (
         <div className='mt-4'>
@@ -94,7 +122,6 @@ const CustomerHomePage = () => {
         <th>Price : </th><th>{item.price}</th>{" "}
         </tr>
         </table> */}
-
         <table className='container table table-hover table-striped mt-4'>
         <thead>
             <tr className='table table-dark'>
@@ -102,23 +129,27 @@ const CustomerHomePage = () => {
             </tr>
         </thead>
         <tbody>
-        
-              
+
         {menuDetails.map((val1,index)=>{
-                
+          
+
                 return <tr key={index}>
                     <td>{index+1}</td>              
                     <td>{val1.type}</td>
                     <td>{val1.description}</td>
                     <td>{val1.price}</td>
                     <td>
-                    <button className ="btn btn-outline-warning btn-sm" type="button"   >Book</button> {" "}
-                    <button className="btn  btn-outline-success btn-sm">Delivery</button>{" "}
-                    <Link to="/subscription" className="btn  btn-outline-danger btn-sm">Subscribe</Link> 
+                    <Link to={`/delivery/${val1.id}`} className="btn btn-outline-danger btn-sm">Book</Link> {" "}
+                    {/* <button name='book' className ="btn btn-outline-warning btn-sm" type="button"  >Book</button>  */}
+                    <button name='delivery' className="btn  btn-outline-success btn-sm" type="button" >Delivery</button>{" "}
+                    <Link to="/subscription" className="btn btn-outline-danger btn-sm">Subscribe</Link> 
                     </td>
                     
                 </tr>
+           
+                
             })}
+        
               
         </tbody>
         </table>
@@ -128,10 +159,11 @@ const CustomerHomePage = () => {
         <Button variant="secondary" onClick={handleClose}>
         Close
         </Button>
-        <Button variant="primary">OK</Button>
+        <Button variant="primary" onClick={handleClose}>OK</Button>
 
         </Modal.Footer>
         </Modal>
+
 
         <Footerr/>
         </div>
