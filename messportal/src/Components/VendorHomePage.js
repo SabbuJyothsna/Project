@@ -61,13 +61,13 @@ const VendorHomePage = () => {
                 <Link to="/dailydelivery" className="btn btn-secondary btn-lg me-4 shadow-lg p-3 mb-5 rounded w-50">Today's Delivery Orders</Link>
                 </Col>
               </Form.Group>
-
-              <Form.Group as={Row} className=" mt-1" controlId="formHorizontalEmail">
+              <br></br>
+              {/* <Form.Group as={Row} className=" mt-1" controlId="formHorizontalEmail">
                 
                 <Col sm={12}>
                 <Link to="/report" className="btn btn-secondary btn-lg me-4 shadow-lg p-3 mb-5 rounded w-50">Monthly Report</Link>
                 </Col>
-              </Form.Group>
+              </Form.Group> */}
               
 
 

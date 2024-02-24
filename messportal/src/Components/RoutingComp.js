@@ -17,6 +17,10 @@ import DailyOrder from './DailyOrder';
 import DailyDelivery from './DailyDelivery';
 import MonthlyReport from './MonthlyReport';
 import PageNotFound from './PageNotFound';
+import Booking from './Booking';
+import About from './About';
+import Contact from './Contact';
+import AdminHomePage from './AdminHomePage';
 
 const RoutingComp = () => {
     return (
@@ -27,11 +31,15 @@ const RoutingComp = () => {
              <Routes>
                  <Route path='/' element={<WelcomeComp/>}></Route>
                  
+                 <Route path='about' element={<About/>}></Route>
+                 <Route path='admin' element={<AdminHomePage/>}></Route>
+                 <Route path='contact' element={<Contact></Contact>}></Route>
                  <Route path='signup' element={<Signup_Customer_vendor/>}></Route>
                  <Route path='signin' element={<Signin_Customer_Vendor/>}></Route>
                  <Route path='homepage1' element={<CustomerHomePage/>}></Route>
                  <Route path='delivery/:id' element={<Delivery/>}></Route>
-                 <Route path='subscription' element={<Subscription/>}></Route>
+                 <Route path='booking/:id' element={<Booking/>}></Route>
+                 <Route path='subscription/:id' element={<Subscription/>}></Route>
                  <Route path='homepage2' element={<VendorHomePage/>}></Route>
                  <Route path='menu' element={<MenuUpdate/>}></Route>
                  <Route path='members' element={<ViewMembers/>}></Route>

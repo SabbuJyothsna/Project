@@ -42,13 +42,14 @@ const Signin_Customer_Vendor = () => {
            // console.log(res.data);
             localStorage.setItem("token",res.data.token);
             //setAuthToken(token);
-            if(selectedOption=="Customer")
-            {
-              
+            if(selectedOption=="Customer") {
               nav("/homepage1");
             }
-            else{
+            else if(selectedOption=="Vendor"){
               nav("/homepage2");
+            }
+            else{
+              nav("/admin");
             }
             
         }).catch((err)=>{})
@@ -56,14 +57,16 @@ const Signin_Customer_Vendor = () => {
 
   //   const setAuthToken = token => {
   //     if (token) {
-  //        return axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  //        return axios.defaults.headers.common["Authorization"] = Bearer ${token};
   //     }
   //     else
   //        return delete axios.defaults.headers.common["Authorization"];
   //  }
+
     
 
   return (
+
     <div>
     <Header/>
     <div className='loginh'>
@@ -120,8 +123,7 @@ const Signin_Customer_Vendor = () => {
             </div>    
         <Footerr/>
   </div>
-        
-      )
-    }
-    
-    export default Signin_Customer_Vendor
+  )
+}
+
+export default Signin_Customer_Vendor

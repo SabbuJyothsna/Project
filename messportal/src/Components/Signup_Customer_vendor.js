@@ -8,10 +8,6 @@ import Header from './Header';
 import { useNavigate } from 'react-router-dom';
 import { Router, Switch, Route, Routes } from 'react-router-dom';
 const Signup_Customer_vendor = () => {
-  //var [roleDescription, setRoleDesciption] = useState(null);
-  //var [roleId, setRoleId] = useState(0);
-  // var [selectedOption, setSelectedOption] = useState(null);
-  //var ucourses=["customer","vendor","admin"]
   var ucourses = [{ id: 1, description: "Cutomer" },
   { id: 2, description: "Vendor" },
   { id: 3, description: "Admin" }]
@@ -27,33 +23,16 @@ const Signup_Customer_vendor = () => {
     roleId: 0,
     roleDescription: " "
   });
-  // const handleSelect = (event) => {
-  //   const {type,name,value,key}=event.target;
-  //   // setRoleId(parseInt(eventKey));
-
-  //   if (value==="customer"){
-  //     console.log(key);
-  //     var id=key;
-  //     setItem({...item,[name]:id});
-  //     // setRoleId(1);
-  //     //console.log("roleid in method"+roleId);
-  //   }
-  //   else if (value==="vendor"){
-
-
-  //     setItem[{...item,[name]:id}];
-  //     //setRoleId(2);
-  //   }
-  //   else{
-  //     //setRoleId(3);
-  //     setItem[{...item,[name]:id}];
-  //   }
-  // };
-
 
   const inputchangehandler = (event) => {
     const { type, name, value } = event.target;
-    setItem({ ...item, [name]: value })
+    if (name === 'addressDescription') {
+      setItem({ ...item, addresses: [{ ...item.addresses[0], [name]: value }] });
+    }
+    else {
+      setItem({ ...item, [name]: value });
+    }
+
   }
 
   const addUser = (event) => {
@@ -62,14 +41,6 @@ const Signup_Customer_vendor = () => {
     axios.post(`http://localhost:8089/messportal/users/reg/add`, item).then(() => {
       window.alert("details added successfully");
       nav("/signin");
-      // if(selectedOption=="Customer")
-      // {
-
-      //   nav("/homepage1");
-      // }
-      // else{
-      //   nav("/homepage2");
-      // }
 
     }).catch((err) => { })
   }
@@ -85,19 +56,7 @@ const Signup_Customer_vendor = () => {
           <Form onSubmit={addUser}>
 
             <Row className="mb-3 mt-3">
-              {/* <Dropdown name="roleId">
-                
-                  <DropdownButton   title={item.roleId ? Selected: ${item.roleId} : 'Sign in as '} onChange={inputchangehandler}>
-                 { ucourses.map((val,index)=>{
-                                return <Dropdown.Item  key={index} value={val} >{val}</Dropdown.Item>
-                            })
-                          }
-                   
-                    {/* <Dropdown.Item  eventKey="1" >Customer</Dropdown.Item>
-                    <Dropdown.Item eventKey="2">Vendor</Dropdown.Item>
-                    <Dropdown.Item eventKey="3">Admin</Dropdown.Item> */}
-              {/* </DropdownButton>
-                </Dropdown> */}
+
               <select name='roleId' className='form-control' onChange={inputchangehandler} >
                 <option value="">Select Your role</option>
                 {
@@ -124,33 +83,33 @@ const Signup_Customer_vendor = () => {
                 <Form.Label>Full Name  : </Form.Label>
                 <Form.Control type="text" name='userName' placeholder="Enter full name  . . . " required value={item.userName} onChange={inputchangehandler} />
               </Form.Group>
-              </Row>
-              <Row className="mb-3 mt-3">
-                <Form.Group as={Col} controlId="formGridPassword">
-                  <Form.Label>Phone : </Form.Label>
-                  <Form.Control type="number" name='userPhone' placeholder="Enter phone number. . ." required value={item.userPhone} onChange={inputchangehandler} />
-                </Form.Group>
-              </Row>
+            </Row>
+            <Row className="mb-3 mt-3">
+              <Form.Group as={Col} controlId="formGridPassword">
+                <Form.Label>Phone : </Form.Label>
+                <Form.Control type="number" name='userPhone' placeholder="Enter phone number. . ." required value={item.userPhone} onChange={inputchangehandler} />
+              </Form.Group>
+            </Row>
 
-              <Row className="mb-3 mt-3">
+            <Row className="mb-3 mt-3">
 
-                <Form.Group as={Col} controlId="formGridPassword">
-                  <Form.Label>Address : </Form.Label>
+              <Form.Group as={Col} controlId="formGridPassword">
+                <Form.Label>Address : </Form.Label>
 
-                  <Form.Control type="text" name='addressDescription' placeholder="Enter full address. . ." required value={item.addresses.addressDescription} onChange={inputchangehandler} />
-                </Form.Group>
-              </Row>
+                <Form.Control type="text" name='addressDescription' placeholder="Enter full address. . ." required value={item.addresses[0].addressDescription} onChange={inputchangehandler} />
+              </Form.Group>
+            </Row>
 
-              <Row>
-                <Form.Group as={Col} controlId="formGridAddress2">
-                  <Form.Label>Government ID Proof  : </Form.Label>
-                  <Form.Control type="number" name='userIdProof' placeholder="Enter Adhar/PAN no.  . . . " value={item.userIdProof} onChange={inputchangehandler} />
-                </Form.Group>
-              </Row>
+            <Row>
+              <Form.Group as={Col} controlId="formGridAddress2">
+                <Form.Label>Government ID Proof  : </Form.Label>
+                <Form.Control type="number" name='userIdProof' placeholder="Enter Adhar/PAN no.  . . . " value={item.userIdProof} onChange={inputchangehandler} />
+              </Form.Group>
+            </Row>
 
-              <Button className="mt-4" variant="primary" type="submit">
-                Submit
-              </Button>
+            <Button className="mt-4" variant="primary" type="submit">
+              Submit
+            </Button>
           </Form>
         </div>
 
